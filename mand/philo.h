@@ -22,11 +22,16 @@
 
 // inputr : ./philo 8 800 200 200 [5]
 
-typedef struct  t_data
+typedef struct  s_data
 {
 	long    philo_num;
 	long	time_to_eat;
 	long	time_to_die;
 	long	time_to_sleep;
 	long	meals_limit;
-}		s_data;
+}		t_data;
+
+
+/* ****prototypes**** */
+
+void	errno(const char *str);

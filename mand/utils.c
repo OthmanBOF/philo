@@ -1,7 +1,7 @@
 #include <philo.h>
 
-void errno(const char *str)
+void    errno(const char *str)
 {
-    printf("%s\n", str);
+    printf(RED "%s\n" RST, str);
     exit(EXIT_FAILURE);
 }
