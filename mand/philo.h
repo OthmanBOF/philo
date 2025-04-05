@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <limits.h>
+#include <sys/time.h>
 
 /*
  * Usage: Include this header in your project to use ANSI color codes in printf.
@@ -23,7 +24,9 @@
 
 // inputr : ./philo 8 800 200 200 [5]
 
-typedef struct pthread_mutics
+typedef pthread_mutex_t t_mtx;
+
+typedef struct s_data t_data;
 
 typedef struct s_fork
 {
@@ -41,10 +44,10 @@ typedef struct s_philo
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	pthread_t	thred_id;
+	t_data		*data;
 }		t_philo;;
 
-
-typedef struct  s_data
+struct  s_data
 {
 
 	long    philo_num;
@@ -54,7 +57,7 @@ typedef struct  s_data
 	long	meals_limit;
 	long	start_simul;
 	bool	end_simul;
-}		t_data;
+};
 
 
 /* ****prototypes**** */
