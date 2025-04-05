@@ -23,13 +23,37 @@
 
 // inputr : ./philo 8 800 200 200 [5]
 
+typedef struct pthread_mutics
+
+typedef struct s_fork
+{
+	t_mtx	fork;
+	int		fork_id;
+}		t_fork;
+
+
+typedef struct s_philo
+{
+	int			id;
+	long		meals_counter;
+	bool		full;
+	long		last_meal_time;
+	t_fork		*left_fork;
+	t_fork		*right_fork;
+	pthread_t	thred_id;
+}		t_philo;;
+
+
 typedef struct  s_data
 {
+
 	long    philo_num;
 	long	time_to_eat;
 	long	time_to_die;
 	long	time_to_sleep;
 	long	meals_limit;
+	long	start_simul;
+	bool	end_simul;
 }		t_data;
 
 
