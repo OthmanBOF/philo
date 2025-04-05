@@ -6,7 +6,6 @@ int main (int ac, char **av)
 
     if (ac == 5 || av == 6)
     {
-        // pars the input in two cases
         pars_args(&data, av);
         // creatin allocing for philos and meat 
         ft_fill(&data);

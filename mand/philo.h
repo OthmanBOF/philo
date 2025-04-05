@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <limits.h>
 
 /*
  * Usage: Include this header in your project to use ANSI color codes in printf.
@@ -35,3 +36,4 @@ typedef struct  s_data
 /* ****prototypes**** */
 
 void	errno(const char *str);
+void	parse_args(t_data *str, char **av);
