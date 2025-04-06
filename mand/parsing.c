@@ -21,14 +21,14 @@ static char  *ft_check(const char *str)
 	if (str == '+')
 		str++;
 	else if (str == '-')
-		errno("only positives :( G");
+		err_exit("only positives :( G");
 	if (!is_digit)
-		errno("only valid numbers");
+		err_exit("only valid numbers");
 	num = str;
 	while (*str++)
 		len++;
 	if (len > 10)
-		errno("only the int range is allowed");
+		err_exit("only the int range is allowed");
 	return (num);
 }
 
@@ -41,7 +41,7 @@ static long	atol(const char *str)
 	while (is_digit(str))
 		res = res * 10 + (*str++ - '0');
 	if (res > INT_MAX)
-		errno("INT_MAX is the maximum");
+		err_exit("INT_MAX is the maximum");
 	return (res);
 }
 
@@ -56,7 +56,7 @@ void	parse_args(t_data *str, char **av)
 	if (str->time_to_die < 6e4 
 		|| str->time_to_eat < 6e4 
 		|| str->time_to_sleep < 6e4 )
-		errno("use timestamps major than 60ms");
+		err_exit("use timestamps major than 60ms");
 	if (av[5])
 		str->meals_limit = atol(av[5]);
 	else

@@ -15,6 +15,6 @@ int main (int ac, char **av)
         cleaner(&data); 
     }
     else
-        errno("feed me well inputs bro:\n"
+        err_exit("feed me well inputs bro:\n"
             GREEN"Correct is ./philo 8 800 200 200 5") ;// todo a function to display errors in std error field 
 }

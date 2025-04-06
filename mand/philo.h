@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <sys/time.h>
-
+#include <errno.h>
 /*
  * Usage: Include this header in your project to use ANSI color codes in printf.
  * Example:
@@ -23,6 +23,17 @@
 #define WHITE   "\033[1;37m"
 
 // inputr : ./philo 8 800 200 200 [5]
+typedef enum s_opcode
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREAT,
+	JOIN,
+	DETACH,
+}		t_opcode;
+
 
 typedef pthread_mutex_t t_mtx;
 
@@ -44,7 +55,6 @@ typedef struct s_philo
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	pthread_t	thred_id;
-	t_data		*data;
 }		t_philo;;
 
 struct  s_data
@@ -57,10 +67,12 @@ struct  s_data
 	long	meals_limit;
 	long	start_simul;
 	bool	end_simul;
+	t_philo	*philo;
 };
 
 
 /* ****prototypes**** */
 
-void	errno(const char *str);
+void	err_exit(const char *str);
 void	parse_args(t_data *str, char **av);
+void	*malloc_safe(size_t bytes);
