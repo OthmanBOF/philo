@@ -76,3 +76,4 @@ struct  s_data
 void	err_exit(const char *str);
 void	parse_args(t_data *str, char **av);
 void	*malloc_safe(size_t bytes);
+void	mutex_safe(t_mtx *mutex, t_opcode opcode)
