@@ -61,7 +61,7 @@ typedef struct s_philo
 
 struct  s_data
 {
-
+	t_mtx	mutex_data;
 	long    philo_num;
 	long	time_to_eat;
 	long	time_to_die;
@@ -69,6 +69,7 @@ struct  s_data
 	long	meals_limit;
 	long	start_simul;
 	bool	end_simul;
+	bool	all_threads_ready;
 	t_fork	*fork;
 	t_philo	*philo;
 };
