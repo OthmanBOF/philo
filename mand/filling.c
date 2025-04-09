@@ -1,8 +1,52 @@
 #include "philo.h"
 
+static void	fork_init(t_philo *philo, t_fork *forks, int philo_position)
+{
+	int	philo_nbr;
+
+	philo_nbr = philo->data->philo_num;
+	philo->first_fork = &forks[(philo_position + 1) % philo_nbr];
+	philo->second_fork = &forks[philo_position];
+	if (philo->id % 2 == 0)
+	{
+	 	philo->first_fork = &forks[philo_position];
+		philo->second_fork = &forks[(philo_position + 1) % philo_nbr];
+	}
+}
+
+
+
+static void	philo_init(t_data *data)
+{
+	int	i;
+	t_philo	*philo;
+
+	i = -1;
+	while (++i < data->philo_num)
+	{
+		philo = data->philo + i;
+		philo->id = i + 1;
+		philo->full = false;
+		philo->meals_counter = 0;
+		philo->data = data;
+		fork_init(philo, data->fork, i);
+	}
+}
+
+
+
 void	ft_fill(t_data *data)
 {
+	int	i;
+
+	i = -1;
 	data->end_simul = false;
-	data->philo = malloc_safe(data->philo_num);
-	
+	data->philo = malloc_safe(sizeof(t_data) * data->philo_num);
+	data->fork = malloc_safe(sizeof(t_fork) * data->philo_num);
+	while (++i < data->philo_num)
+	{
+		mutex_safe(&data->fork[i].fork, INIT);
+		data->fork[i].fork_id = i;
+	}
+	philo_init(data);
 }

@@ -48,13 +48,15 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
+
 	int			id;
 	long		meals_counter;
 	bool		full;
 	long		last_meal_time;
-	t_fork		*left_fork;
-	t_fork		*right_fork;
+	t_fork		*first_fork;
+	t_fork		*second_fork;
 	pthread_t	thred_id;
+	t_data		*data;
 }		t_philo;;
 
 struct  s_data
@@ -67,6 +69,7 @@ struct  s_data
 	long	meals_limit;
 	long	start_simul;
 	bool	end_simul;
+	t_fork	*fork;
 	t_philo	*philo;
 };
 
@@ -78,3 +81,4 @@ void	parse_args(t_data *str, char **av);
 void	*malloc_safe(size_t bytes);
 void	mutex_safe(t_mtx *mutex, t_opcode opcode);
 void	thread_safe(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
+void	ft_fill(t_data *data);
