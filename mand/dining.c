@@ -5,7 +5,7 @@ void	dinner_simul(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-
+	wait_all_threads(philo->data);
 
 
 
@@ -22,11 +22,12 @@ void	dining(t_data *data)
 	if (data->meals_limit == 0)
 		return ;
 	else if (data->philo_num == 1)
-		;//todo 
+		;//todo
+	else
+	{
 	while (++i < data->philo_num)
 		thread_safe(&data->philo[i].thred_id, dinner_simul,
 			&data->philo[i], CREAT);
+	}
 	
-
-
 }
