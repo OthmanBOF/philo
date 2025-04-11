@@ -44,6 +44,7 @@ void	ft_fill(t_data *data)
 	data->all_threads_ready = false;
 	data->philo = malloc_safe(sizeof(t_data) * data->philo_num);
 	mutex_safe(&data->mutex_data, INIT);
+	mutex_safe(&data->write_mutex, INIT);
 	data->fork = malloc_safe(sizeof(t_fork) * data->philo_num);
 	while (++i < data->philo_num)
 	{
