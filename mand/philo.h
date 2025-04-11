@@ -107,4 +107,4 @@ void	set_bools(t_mtx *mutex, bool *dest, bool value);
 void	wait_all_threads(t_data *data);
 long	gettime(t_time_code time_code);
 void	precise_usleep(long usec, t_data *data);
-
+void	write_status(t_philo_status status, t_philo *philo);

@@ -1,5 +1,18 @@
 # include "philo.h"
 
+
+static void	eat(t_philo *philo)
+{
+	mutex_safe(&philo->first_fork->fork, LOCK);
+	write_status(TAKE_FIRST_FOKR, philo);
+	mutex_safe(&philo->second_fork->fork, LOCK);
+	write_status(TAKE_SECOND_FORK, philo);
+	
+
+
+}
+
+
 void	dinner_simul(void *data)
 {
 	t_philo	*philo;
@@ -10,7 +23,9 @@ void	dinner_simul(void *data)
 	{
 		if (philo->full)
 			break ;
-		
+		eat(philo);
+		write_status(SLEEPING, philo);
+		precise_usleep(philo->data->time_to_sleep, philo->data);
 	}
 
 	return (NULL);
@@ -38,6 +53,4 @@ void	dining(t_data *data)
 	i = -1;
 	while (++i < data->philo_num)
 		thread_safe(data->philo[i].thred_id, NULL, NULL, JOIN);
-
-
 }
