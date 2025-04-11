@@ -6,4 +6,8 @@ void	err_exit(const char *str)
 	exit(EXIT_FAILURE);
 }
 
-long	gettime()
+long	gettime(t_time_code time_code)
+{
+	struct	timeval	tv;
+	gettimeofday(&tv, NULL);
+}
