@@ -96,3 +96,5 @@ bool	get_bool(t_mtx *mutex, bool *value);
 void	set_bools(t_mtx *mutex, bool *dest, bool value);
 void	wait_all_threads(t_data *data);
 long	gettime(t_time_code time_code);
+void	precise_usleep(long usec, t_data *data);
+
