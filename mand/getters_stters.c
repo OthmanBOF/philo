@@ -34,7 +34,7 @@ void	set_long(t_mtx *mutex,long *dest ,long *value)
 	mutex_safe(mutex, UNLOCK);
 }
 
-void	simulation_finished(t_data *data)
+bool	simulation_finished(t_data *data)
 {
 	return (get_bool(&data->mutex_data, &data->end_simul));
 }
