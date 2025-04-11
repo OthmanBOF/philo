@@ -22,7 +22,6 @@
 #define CYAN    "\033[1;36m"
 #define WHITE   "\033[1;37m"
 
-// inputr : ./philo 8 800 200 200 [5]
 typedef enum s_opcode
 {
 	LOCK,
@@ -33,6 +32,13 @@ typedef enum s_opcode
 	JOIN,
 	DETACH,
 }		t_opcode;
+
+typedef enum e_time_code
+{
+	SECOND,
+	MILLISECOND,
+	MICROSECOND,
+}			t_time_code;
 
 
 typedef pthread_mutex_t t_mtx;
@@ -83,3 +89,10 @@ void	*malloc_safe(size_t bytes);
 void	mutex_safe(t_mtx *mutex, t_opcode opcode);
 void	thread_safe(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
 void	ft_fill(t_data *data);
+void	simulation_finished(t_data *data);
+void	set_long(t_mtx *mutex,long *dest ,long *value);
+long	get_long(t_mtx *mutex, long *value);
+bool	get_bool(t_mtx *mutex, bool *value);
+void	set_bools(t_mtx *mutex, bool *dest, bool value);
+void	simulation_finished(t_data *data);
+void	xait_all_threads(t_data *data);

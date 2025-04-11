@@ -7,8 +7,6 @@ void	dinner_simul(void *data)
 	philo = (t_philo *)data;
 	wait_all_threads(philo->data);
 
-
-
 	return (NULL);
 }
 
@@ -30,4 +28,6 @@ void	dining(t_data *data)
 			&data->philo[i], CREAT);
 	}
 	
+	set_bools(&data->mutex_data, &data->all_threads_ready, true);
+
 }
