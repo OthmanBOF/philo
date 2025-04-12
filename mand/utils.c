@@ -22,9 +22,6 @@ long	gettime(t_time_code time_code)
 	return (1337);
 }
 
-
-//presice usleep cause the original is not good for this project
-
 void	precise_usleep(long usec, t_data *data)
 {
 	long	start;
@@ -48,3 +45,19 @@ void	precise_usleep(long usec, t_data *data)
 	}
 }
 
+void	clean(t_data *data)
+{
+	t_philo	*philo;
+	int		i;
+
+	i = -1;
+	while (++i < data->philo_num)
+	{
+		philo = data->philo + i;
+		mutex_safe(&philo->philo_mutex, DESTROY);
+	}
+	mutex_safe(&data->write_mutex, DESTROY);
+	mutex_safe(&data->mutex_data, DESTROY);
+	free(data->fork);
+	free(data->philo);
+}

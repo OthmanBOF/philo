@@ -114,3 +114,4 @@ void	write_status(t_philo_status status, t_philo *philo);
 void	monitor_dinner(void *data);
 bool	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
 void	increase_long(t_mtx *mutex, long *val);
+void	clean(t_data *data);

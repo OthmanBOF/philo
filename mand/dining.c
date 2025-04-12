@@ -81,4 +81,5 @@ void	dining(t_data *data)
 	while (++i < data->philo_num)
 		thread_safe(data->philo[i].thred_id, NULL, NULL, JOIN);
 	set_bools(&data->mutex_data, &data->end_simul, true);
+	thread_safe(&data->monitor, NULL, NULL, JOIN);
 }
