@@ -5,6 +5,21 @@ static void	thinking(t_philo *philo)
 	write_status(THINKING, philo);
 }
 
+void	*lone_philo(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	wait_all_threads(philo->data);
+	set_long(&philo->data->mutex_data, &philo->last_meal_time,gettime(MILLISECOND));
+	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
+	write_status(TAKE_FIRST_FOKR, philo);
+	while (!simulation_finished(philo->data))
+		usleep(200);
+	return (NULL);
+}
+
+
 static void	eat(t_philo *philo)
 {
 	mutex_safe(&philo->first_fork->fork, LOCK);
@@ -28,6 +43,8 @@ void	dinner_simul(void *data)
 
 	philo = (t_philo *)data;
 	wait_all_threads(philo->data);
+	set_long(&philo->philo_mutex, &philo->last_meal_time,
+			gettime(MILLISECOND));
 	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
 	while (!simulation_finished(philo->data))
 	{
@@ -50,7 +67,7 @@ void	dining(t_data *data)
 	if (data->meals_limit == 0)
 		return ;
 	else if (data->philo_num == 1)
-		;//todo
+		thread_safe(&data->philo[0].thred_id, lone_philo, &data->philo[0], CREAT);
 	else
 	{
 	while (++i < data->philo_num)

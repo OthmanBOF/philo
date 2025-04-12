@@ -1,5 +1,21 @@
 #include "philo.h"
 
+static bool	philo_died(t_philo *philo)
+{
+	long	elapsed;
+	long	t_to_die;
+
+	if (get_bool(&philo->philo_mutex, &philo->full))
+		return (false);
+	elapsed = gettime(MILLISECOND) - get_long(&philo->philo_mutex, &philo->last_meal_time);
+	t_to_die = philo->data->time_to_die;
+	if (elapsed > t_to_die)
+		return (true);
+	return (false);
+}
+
+
+
 void	monitor_dinner(void *data)
 {
 	int	i;
@@ -16,7 +32,7 @@ void	monitor_dinner(void *data)
 			if (philo_died(table->philo + i))
 			{
 				set_bools(&table->mutex_data, &table->end_simul, true);
-				write_status(DIED, )
+				write_status(DIED, table->philo + i);
 			}
 		}
 	}
