@@ -115,3 +115,5 @@ void	monitor_dinner(void *data);
 bool	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
 void	increase_long(t_mtx *mutex, long *val);
 void	clean(t_data *data);
+void	thinking(t_philo *philo);
+void	de_sync_philos(t_philo *philo);

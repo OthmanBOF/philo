@@ -25,3 +25,17 @@ bool all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 	mutex_safe(mutex, UNLOCK);
 	return (ret);
 }
+
+void	de_sync_philos(t_philo *philo)
+{
+	if (philo->data->philo_num % 2 == 0)
+	{
+		if (philo->id % 2 == 0)
+			precise_usleep(3e3, philo->data);
+	}
+	else
+	{
+		if (philo->id % 2)
+			thinking(philo);
+	}
+}

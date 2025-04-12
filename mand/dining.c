@@ -1,6 +1,6 @@
 # include "philo.h"
 
-static void	thinking(t_philo *philo)
+void	thinking(t_philo *philo)
 {
 	write_status(THINKING, philo);
 }
@@ -46,6 +46,7 @@ void	dinner_simul(void *data)
 	set_long(&philo->philo_mutex, &philo->last_meal_time,
 			gettime(MILLISECOND));
 	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
+	de_sync_philos()
 	while (!simulation_finished(philo->data))
 	{
 		if (philo->full)
