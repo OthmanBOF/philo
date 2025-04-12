@@ -1,5 +1,9 @@
 # include "philo.h"
 
+static void	thinking(t_philo *philo)
+{
+	write_status(THINKING, philo);
+}
 
 static void	eat(t_philo *philo)
 {
@@ -7,11 +11,16 @@ static void	eat(t_philo *philo)
 	write_status(TAKE_FIRST_FOKR, philo);
 	mutex_safe(&philo->second_fork->fork, LOCK);
 	write_status(TAKE_SECOND_FORK, philo);
-	
-
-
+	set_long(&philo->philo_mutex, philo->last_meal_time, gettime(MILLISECOND));
+	philo->meals_counter++;
+	write_status(EATING, philo);
+	precise_usleep(philo->data->time_to_eat, philo->data);
+	if (philo->data->meals_limit > 0
+			&& philo->meals_counter == philo->data->meals_limit)
+		set_bools(&philo->philo_mutex, &philo->full, true);
+	mutex_safe(&philo->first_fork->fork, UNLOCK);
+	mutex_safe(&philo->second_fork->fork, UNLOCK);
 }
-
 
 void	dinner_simul(void *data)
 {
@@ -26,12 +35,11 @@ void	dinner_simul(void *data)
 		eat(philo);
 		write_status(SLEEPING, philo);
 		precise_usleep(philo->data->time_to_sleep, philo->data);
+		thinking(philo);
 	}
 
 	return (NULL);
 }
-
-
 
 void	dining(t_data *data)
 {

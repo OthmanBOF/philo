@@ -71,6 +71,7 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	pthread_t	thred_id;
+	t_mtx		philo_mutex;
 	t_data		*data;
 }		t_philo;;
 
