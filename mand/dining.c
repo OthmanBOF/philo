@@ -1,8 +1,22 @@
 # include "philo.h"
 
-void	thinking(t_philo *philo)
+void	thinking(t_philo *philo, bool pre_simul)
 {
+	long	t_eat;
+	long	t_sleep;
+	long	t_think;
+
+	if (!pre_simul)
+		write_status(THINKING, philo);
 	write_status(THINKING, philo);
+	if (philo->data->philo_num % 2 == 0)
+		return ;
+	t_eat = philo->data->time_to_eat;
+	t_sleep = philo->data->time_to_sleep;
+	t_think = t_eat * 2 - t_sleep;
+	if (t_think < 0)
+		t_think = 0;
+	precise_usleep(t_think * 0.42, philo->data);
 }
 
 void	*lone_philo(void *arg)
@@ -46,7 +60,7 @@ void	dinner_simul(void *data)
 	set_long(&philo->philo_mutex, &philo->last_meal_time,
 			gettime(MILLISECOND));
 	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
-	de_sync_philos()
+	de_sync_philos(philo);
 	while (!simulation_finished(philo->data))
 	{
 		if (philo->full)
@@ -54,7 +68,7 @@ void	dinner_simul(void *data)
 		eat(philo);
 		write_status(SLEEPING, philo);
 		precise_usleep(philo->data->time_to_sleep, philo->data);
-		thinking(philo);
+		thinking(philo, false);
 	}
 
 	return (NULL);

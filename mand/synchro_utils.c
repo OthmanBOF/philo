@@ -31,11 +31,11 @@ void	de_sync_philos(t_philo *philo)
 	if (philo->data->philo_num % 2 == 0)
 	{
 		if (philo->id % 2 == 0)
-			precise_usleep(3e3, philo->data);
+			precise_usleep(3e4, philo->data);
 	}
 	else
 	{
 		if (philo->id % 2)
-			thinking(philo);
+			thinking(philo, true);
 	}
 }

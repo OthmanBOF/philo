@@ -34,8 +34,6 @@ static void	philo_init(t_data *data)
 	}
 }
 
-
-
 void	ft_fill(t_data *data)
 {
 	int	i;
