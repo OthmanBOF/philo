@@ -77,18 +77,20 @@ typedef struct s_philo
 
 struct  s_data
 {
-	long	philo_num;
-	long	time_to_eat;
-	long	time_to_die;
-	long	time_to_sleep;
-	long	meals_limit;
-	long	start_simul;
-	bool	end_simul;
-	t_mtx	mutex_data;
-	t_mtx	write_mutex;
-	bool	all_threads_ready;
-	t_fork	*fork;
-	t_philo	*philo;
+	long		philo_num;
+	long		time_to_eat;
+	long		time_to_die;
+	long		time_to_sleep;
+	long		meals_limit;
+	long		threads_running_nbr;
+	long		start_simul;
+	bool		end_simul;
+	pthread_t	monitor;
+	t_mtx		mutex_data;
+	t_mtx		write_mutex;
+	bool		all_threads_ready;
+	t_fork		*fork;
+	t_philo		*philo;
 };
 
 
@@ -109,3 +111,6 @@ void	wait_all_threads(t_data *data);
 long	gettime(t_time_code time_code);
 void	precise_usleep(long usec, t_data *data);
 void	write_status(t_philo_status status, t_philo *philo);
+void	monitor_dinner(void *data);
+bool	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
+void	increase_long(t_mtx *mutex, long *val);

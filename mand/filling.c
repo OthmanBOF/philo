@@ -41,6 +41,7 @@ void	ft_fill(t_data *data)
 	int	i;
 
 	i = -1;
+	data->threads_running_nbr = 0;
 	data->end_simul = false;
 	data->all_threads_ready = false;
 	data->philo = malloc_safe(sizeof(t_data) * data->philo_num);

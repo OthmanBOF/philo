@@ -28,6 +28,7 @@ void	dinner_simul(void *data)
 
 	philo = (t_philo *)data;
 	wait_all_threads(philo->data);
+	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
 	while (!simulation_finished(philo->data))
 	{
 		if (philo->full)
@@ -56,6 +57,7 @@ void	dining(t_data *data)
 		thread_safe(&data->philo[i].thred_id, dinner_simul,
 			&data->philo[i], CREAT);
 	}
+	thread_safe(&data->monitor, monitor_dinner, data, CREAT);
 	data->start_simul = gettime(MILLISECOND);
 	set_bools(&data->mutex_data, &data->all_threads_ready, true);
 	i = -1;
