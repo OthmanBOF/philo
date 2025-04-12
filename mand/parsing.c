@@ -16,7 +16,7 @@ static char  *ft_check(const char *str)
 	const char	*num;
 
 	len = 0;
-	while (ft_isspace)
+	while (ft_isspace(str))
 		str++;
 	if (str == '+')
 		str++;
@@ -46,15 +46,15 @@ static long	atol(const char *str)
 }
 
 
-//i need to adjust the midel to suit the check of negative apearences and display an error then exit clean 
-void	parse_args(t_data *str, char **av) 
+//i need to adjust the midel to suit the check of negative apearences and display an error then exit clean
+void	parse_args(t_data *str, char **av)
 {
 	str->philo_num = atol(av[1]);
 	str->time_to_die = atol(av[2]) * 1e3;
 	str->time_to_eat = atol(av[3]) * 1e3;
 	str->time_to_sleep = atol(av[4]) * 1e3;
-	if (str->time_to_die < 6e4 
-		|| str->time_to_eat < 6e4 
+	if (str->time_to_die < 6e4
+		|| str->time_to_eat < 6e4
 		|| str->time_to_sleep < 6e4 )
 		err_exit("use timestamps major than 60ms");
 	if (av[5])
