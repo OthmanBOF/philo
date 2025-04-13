@@ -78,6 +78,7 @@ void	dining(t_data *data)
 
 	if (data->meals_limit == 0)
 		return ;
+	data->start_simul = gettime(MILLISECOND);
 	if (data->philo_num == 1)
 		thread_safe(&data->philo[0].thred_id, lone_philo, &data->philo[0], CREAT);
 	else
@@ -87,7 +88,6 @@ void	dining(t_data *data)
 		thread_safe(&data->philo[i].thred_id, dinner_simul,
 			&data->philo[i], CREAT);
 	}
-	data->start_simul = gettime(MILLISECOND);
 	thread_safe(&data->monitor, monitor_dinner, data, CREAT);
 	set_bools(&data->mutex_data, &data->all_threads_ready, true);
 	i = -1;
