@@ -16,11 +16,11 @@ void	increase_long(t_mtx *mutex, long *val)
 
 bool all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 {
-	bool	ret,
+	bool	ret;
 
 	ret = false;
 	mutex_safe(mutex, LOCK);
-	if (threads == philo_nbr)
+	if (*threads == philo_nbr)
 		ret = true;
 	mutex_safe(mutex, UNLOCK);
 	return (ret);

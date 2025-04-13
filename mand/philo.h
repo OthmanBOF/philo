@@ -103,7 +103,7 @@ void	mutex_safe(t_mtx *mutex, t_opcode opcode);
 void	thread_safe(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
 void	ft_fill(t_data *data);
 bool	simulation_finished(t_data *data);
-void	set_long(t_mtx *mutex,long *dest ,long *value);
+void	set_long(t_mtx *mutex,long *dest ,long value);
 long	get_long(t_mtx *mutex, long *value);
 bool	get_bool(t_mtx *mutex, bool *value);
 void	set_bools(t_mtx *mutex, bool *dest, bool value);
@@ -111,9 +111,12 @@ void	wait_all_threads(t_data *data);
 long	gettime(t_time_code time_code);
 void	precise_usleep(long usec, t_data *data);
 void	write_status(t_philo_status status, t_philo *philo);
-void	monitor_dinner(void *data);
+void	*monitor_dinner(void *data);
 bool	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
 void	increase_long(t_mtx *mutex, long *val);
 void	clean(t_data *data);
 void	thinking(t_philo *philo, bool pre_simul);
 void	de_sync_philos(t_philo *philo);
+void	dining(t_data *data);
+
+

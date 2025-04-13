@@ -1,4 +1,4 @@
-#include <philo.h>
+#include "philo.h"
 
 void	err_exit(const char *str)
 {
@@ -9,7 +9,7 @@ void	err_exit(const char *str)
 long	gettime(t_time_code time_code)
 {
 	struct	timeval	tv;
-	if (gettimeofday(&tv, NULL));
+	if (gettimeofday(&tv, NULL))
 		err_exit("Gettimeofdayfailed");
 	if (SECOND == time_code)
 		return (tv.tv_sec + (tv.tv_usec / 1e6));

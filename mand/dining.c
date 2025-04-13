@@ -8,7 +8,6 @@ void	thinking(t_philo *philo, bool pre_simul)
 
 	if (!pre_simul)
 		write_status(THINKING, philo);
-	write_status(THINKING, philo);
 	if (philo->data->philo_num % 2 == 0)
 		return ;
 	t_eat = philo->data->time_to_eat;
@@ -25,7 +24,7 @@ void	*lone_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	wait_all_threads(philo->data);
-	set_long(&philo->data->mutex_data, &philo->last_meal_time,gettime(MILLISECOND));
+	set_long(&philo->data->mutex_data, &philo->last_meal_time, gettime(MILLISECOND));
 	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
 	write_status(TAKE_FIRST_FOKR, philo);
 	while (!simulation_finished(philo->data))
@@ -40,7 +39,7 @@ static void	eat(t_philo *philo)
 	write_status(TAKE_FIRST_FOKR, philo);
 	mutex_safe(&philo->second_fork->fork, LOCK);
 	write_status(TAKE_SECOND_FORK, philo);
-	set_long(&philo->philo_mutex, philo->last_meal_time, gettime(MILLISECOND));
+	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILLISECOND));
 	philo->meals_counter++;
 	write_status(EATING, philo);
 	precise_usleep(philo->data->time_to_eat, philo->data);
@@ -51,7 +50,7 @@ static void	eat(t_philo *philo)
 	mutex_safe(&philo->second_fork->fork, UNLOCK);
 }
 
-void	dinner_simul(void *data)
+void	*dinner_simul(void *data)
 {
 	t_philo	*philo;
 
@@ -70,7 +69,6 @@ void	dinner_simul(void *data)
 		precise_usleep(philo->data->time_to_sleep, philo->data);
 		thinking(philo, false);
 	}
-
 	return (NULL);
 }
 
@@ -78,23 +76,23 @@ void	dining(t_data *data)
 {
 	int	i;
 
-	i = -1;
 	if (data->meals_limit == 0)
 		return ;
-	else if (data->philo_num == 1)
+	if (data->philo_num == 1)
 		thread_safe(&data->philo[0].thred_id, lone_philo, &data->philo[0], CREAT);
 	else
 	{
+		i = -1;
 	while (++i < data->philo_num)
 		thread_safe(&data->philo[i].thred_id, dinner_simul,
 			&data->philo[i], CREAT);
 	}
-	thread_safe(&data->monitor, monitor_dinner, data, CREAT);
 	data->start_simul = gettime(MILLISECOND);
+	thread_safe(&data->monitor, monitor_dinner, data, CREAT);
 	set_bools(&data->mutex_data, &data->all_threads_ready, true);
 	i = -1;
-	while (++i < data->philo_num)
-		thread_safe(data->philo[i].thred_id, NULL, NULL, JOIN);
-	set_bools(&data->mutex_data, &data->end_simul, true);
 	thread_safe(&data->monitor, NULL, NULL, JOIN);
+	while (++i < data->philo_num)
+		thread_safe(&data->philo[i].thred_id, NULL, NULL, JOIN);
+	set_bools(&data->mutex_data, &data->end_simul, true);
 }

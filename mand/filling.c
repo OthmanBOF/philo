@@ -5,16 +5,15 @@ static void	fork_init(t_philo *philo, t_fork *forks, int philo_position)
 	int	philo_nbr;
 
 	philo_nbr = philo->data->philo_num;
-	philo->first_fork = &forks[(philo_position + 1) % philo_nbr];
-	philo->second_fork = &forks[philo_position];
 	if (philo->id % 2 == 0)
 	{
 	 	philo->first_fork = &forks[philo_position];
 		philo->second_fork = &forks[(philo_position + 1) % philo_nbr];
 	}
+	else
+		philo->first_fork = &forks[(philo_position + 1) % philo_nbr];
+		philo->second_fork = &forks[philo_position];
 }
-
-
 
 static void	philo_init(t_data *data)
 {
@@ -42,7 +41,7 @@ void	ft_fill(t_data *data)
 	data->threads_running_nbr = 0;
 	data->end_simul = false;
 	data->all_threads_ready = false;
-	data->philo = malloc_safe(sizeof(t_data) * data->philo_num);
+	data->philo = malloc_safe(sizeof(t_philo) * data->philo_num);
 	mutex_safe(&data->mutex_data, INIT);
 	mutex_safe(&data->write_mutex, INIT);
 	data->fork = malloc_safe(sizeof(t_fork) * data->philo_num);

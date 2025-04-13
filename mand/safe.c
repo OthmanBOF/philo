@@ -66,7 +66,7 @@ static void	threads_error(int status, t_opcode opcode)
 void	thread_safe(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode)
 {
 	if (CREAT == opcode)
-		threads_error(pthread_create(*thread, NULL, foo, data), opcode);
+		threads_error(pthread_create(thread, NULL, foo, data), opcode);
 	else if (opcode == JOIN)
 		threads_error(pthread_join(*thread, NULL), opcode);
 	else if (opcode == DETACH)

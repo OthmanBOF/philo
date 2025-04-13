@@ -14,7 +14,7 @@ static bool	philo_died(t_philo *philo)
 	return (false);
 }
 
-void	monitor_dinner(void *data)
+void	*monitor_dinner(void *data)
 {
 	int	i;
 	t_data	*table;
@@ -31,6 +31,7 @@ void	monitor_dinner(void *data)
 			{
 				set_bools(&table->mutex_data, &table->end_simul, true);
 				write_status(DIED, table->philo + i);
+				break;
 			}
 		}
 	}

@@ -27,7 +27,7 @@ long	get_long(t_mtx *mutex, long *value)
 	return (ret);
 }
 
-void	set_long(t_mtx *mutex,long *dest ,long *value)
+void	set_long(t_mtx *mutex,long *dest ,long value)
 {
 	mutex_safe(mutex, LOCK);
 	*dest = value;

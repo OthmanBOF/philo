@@ -8,7 +8,7 @@ RM = rm -f
 
 CC = cc
 
-SRC = ./mand/filling.c ./mand/parsing.c ./mand/safe.c ./mand/dining.c ./mand/getters_setters.c ./mand/monitor.c ./mand/utils.c ./mand/write.c ./madn/utls.c ./mand/philo.c
+SRC = ./mand/synchro_utils.c ./mand/filling.c ./mand/parsing.c ./mand/safe.c ./mand/dining.c ./mand/getters_stters.c ./mand/monitor.c ./mand/utils.c ./mand/write.c ./mand/philo.c
 
 OBJ = $(SRC:.c=.o)
 

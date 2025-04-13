@@ -4,12 +4,12 @@ int main (int ac, char **av)
 {
 	t_data  data;
 
-	if (ac == 5 || av == 6)
+	if (ac == 5 || ac == 6)
 	{
-		pars_args(&data, av);
+		parse_args(&data, av);
 		ft_fill(&data);
 		dining(&data);
-		cleaner(&data);
+		clean(&data);
 	}
 	else
 		err_exit("feed me well inputs bro:\n"
