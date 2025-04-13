@@ -24,15 +24,16 @@ void	*monitor_dinner(void *data)
 		;
 	while (!simulation_finished(table))
 	{
-		i = -1;
-		while (++i < table->philo_num)
+		i = 0;
+		while (i < table->philo_num && !get_bool(&table->mutex_data,
+					&table->end_simul))
 		{
 			if (philo_died(table->philo + i))
 			{
 				set_bools(&table->mutex_data, &table->end_simul, true);
 				write_status(DIED, table->philo + i);
-				break;
 			}
+			i++;
 		}
 	}
 	return (NULL);
