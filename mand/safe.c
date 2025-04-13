@@ -72,6 +72,8 @@ void	thread_safe(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode o
 	else if (opcode == DETACH)
 		threads_error(pthread_detach(*thread), opcode);
 	else
+	{
 		err_exit("wrong opcode for thrade_safe:"
 		"use: <CREAT> <JOIN> <DETACH>");
+	}
 }
