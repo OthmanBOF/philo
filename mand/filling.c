@@ -10,9 +10,11 @@ static void	fork_init(t_philo *philo, t_fork *forks, int philo_position)
 	 	philo->first_fork = &forks[philo_position];
 		philo->second_fork = &forks[(philo_position + 1) % philo_nbr];
 	}
-	else
+	if (philo->id % 2 != 0)
+	{
 		philo->first_fork = &forks[(philo_position + 1) % philo_nbr];
 		philo->second_fork = &forks[philo_position];
+	}
 }
 
 static void	philo_init(t_data *data)
