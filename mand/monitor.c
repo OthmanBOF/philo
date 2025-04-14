@@ -28,10 +28,11 @@ void	*monitor_dinner(void *data)
 		while (++i < table->philo_num && !get_bool(&table->mutex_data,
 					&table->end_simul))
 		{
-			if (philo_died(table->philo + i))
+			if (philo_died(table->philo + i) == true)
 			{
 				set_bools(&table->mutex_data, &table->end_simul, true);
 				write_status(DIED, table->philo + i);
+				break;
 			}
 		}
 	}

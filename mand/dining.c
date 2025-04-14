@@ -60,7 +60,7 @@ void	*dinner_simul(void *data)
 			gettime(MILLISECOND));
 	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
 	de_sync_philos(philo);
-	while (!get_bool(&philo->data->mutex_data, &philo->full))
+	while (!get_bool(&philo->data->mutex_data, &philo->data->end_simul))
 	{
 		if (get_bool(&philo->philo_mutex, &philo->full))
 			break ;
@@ -92,9 +92,7 @@ void	dining(t_data *data)
 	set_bools(&data->mutex_data, &data->all_threads_ready, true);
 	i = -1;
 	while (++i < data->philo_num)
-	{
 		thread_safe(&data->philo[i].thred_id, NULL, NULL, JOIN);
-	}
 	set_bools(&data->mutex_data, &data->end_simul, true);
 	thread_safe(&data->monitor, NULL, NULL, JOIN);
 }
