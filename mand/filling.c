@@ -29,8 +29,8 @@ static void	philo_init(t_data *data)
 		philo->id = i + 1;
 		philo->full = false;
 		philo->meals_counter = 0;
-		philo->data = data;
 		mutex_safe(&philo->philo_mutex, INIT);
+		philo->data = data;
 		fork_init(philo, data->fork, i);
 	}
 }

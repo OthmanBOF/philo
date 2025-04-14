@@ -22,6 +22,8 @@
 #define CYAN    "\033[1;36m"
 #define WHITE   "\033[1;37m"
 
+# define PH_MAX 200
+
 typedef enum s_opcode
 {
 	LOCK,
@@ -77,6 +79,7 @@ typedef struct s_philo
 
 struct  s_data
 {
+	int			error_flag;
 	long		philo_num;
 	long		time_to_eat;
 	long		time_to_die;

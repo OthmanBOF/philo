@@ -21,9 +21,15 @@ static char  *ft_check(const char *str)
 	if (*str == '+')
 		str++;
 	else if (*str == '-')
+	{
 		err_exit("only positives :( G");
+		return(0);
+	}
 	if (!is_digit(*str))
+	{
 		err_exit("only valid numbers");
+		return (0);
+	}
 	num = str;
 	while (*str++)
 		len++;
@@ -41,7 +47,10 @@ static long	my_atol(const char *str)
 	while (is_digit(*str))
 		res = res * 10 + (*str++ - '0');
 	if (res > INT_MAX)
+	{
 		err_exit("INT_MAX is the maximum");
+		return (0);
+	}
 	return (res);
 }
 
@@ -49,13 +58,22 @@ static long	my_atol(const char *str)
 void	parse_args(t_data *str, char **av)
 {
 	str->philo_num = my_atol(av[1]);
+	if (str->philo_num > PH_MAX || str->philo_num < 1)
+	{
+		str->error_flag = 1;
+		err_exit("exxeded the max philos 200 :)");
+		return ;
+	}
 	str->time_to_die = my_atol(av[2]) * 1e3;
 	str->time_to_eat = my_atol(av[3]) * 1e3;
 	str->time_to_sleep = my_atol(av[4]) * 1e3;
 	if (str->time_to_die < 6e4
 		|| str->time_to_eat < 6e4
-		|| str->time_to_sleep < 6e4 )
-		err_exit("use timestamps major than 60ms");
+		|| str->time_to_sleep < 6e4)
+		{
+			err_exit("use timestamps major than 60ms");
+			str->error_flag = 1;
+		}
 	if (av[5])
 		str->meals_limit = atol(av[5]);
 	else

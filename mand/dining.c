@@ -15,7 +15,7 @@ void	thinking(t_philo *philo, bool pre_simul)
 	t_think = (t_eat * 2) - t_sleep;
 	if (t_think < 0)
 		t_think = 0;
-	precise_usleep(t_think * 0.42, philo->data);
+	precise_usleep(t_think * 0.5, philo->data);
 }
 
 void	*lone_philo(void *arg)
