@@ -2,7 +2,7 @@ NAME = philo
 
 INCLUDE = philo.h
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
 
 RM = rm -f
 

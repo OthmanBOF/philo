@@ -34,6 +34,7 @@ void	*monitor_dinner(void *data)
 				write_status(DIED, table->philo + i);
 				break;
 			}
+			usleep (600);
 		}
 	}
 	return (NULL);

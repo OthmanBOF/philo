@@ -6,7 +6,10 @@ void	*malloc_safe(size_t bytes)
 
 	ret = malloc(bytes);
 	if (ret == NULL)
+	{
 		err_exit("malloc error <-_->");
+		return (NULL);
+	}
 	return (ret);
 }
 
