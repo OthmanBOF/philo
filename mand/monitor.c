@@ -22,7 +22,7 @@ void	*monitor_dinner(void *data)
 	table = (t_data *)data;
 	while (!all_threads_running(&table->mutex_data, &table->threads_running_nbr, table->philo_num))
 		;
-	while (!simulation_finished(table))
+	while ( !get_bool(&table->mutex_data, &table->end_simul))
 	{
 		i = -1;
 		while (++i < table->philo_num && !get_bool(&table->mutex_data,
@@ -32,7 +32,6 @@ void	*monitor_dinner(void *data)
 			{
 				set_bools(&table->mutex_data, &table->end_simul, true);
 				write_status(DIED, table->philo + i);
-				break;
 			}
 			usleep (600);
 		}

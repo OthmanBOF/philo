@@ -25,7 +25,7 @@ static long	my_atol(t_data *data, const char *str)
 	res = 0;
 	while(is_digit(*str))
 		res = res * 10 + (*str++ - '0');
-	while (*str++)
+	while (*str)
 	{
 		if (!ft_isspace(*str))
 			data->error_flag = 1;
@@ -75,7 +75,7 @@ void	parse_args(t_data *str, char **av)
 			str->error_flag = 1;
 		}
 	if (av[5])
-		str->meals_limit = atol(av[5]);
+		str->meals_limit = ft_check(str, av[5]);
 	else
 		str->meals_limit = -1;
 }
