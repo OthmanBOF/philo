@@ -32,11 +32,11 @@ void	precise_usleep(long usec, t_data *data)
 	while (gettime(MICROSECOND) - start < usec)
 	{
 		if (simulation_finished(data))
-			break ;
+			return ;
 		elapsed = gettime(MICROSECOND) - start;
 		rem = usec - elapsed;
 		if (rem > 1e4)
-			usleep(rem / 2);
+			usleep(1000);
 		else
 		{
 			while (gettime(MICROSECOND) - start < usec)
