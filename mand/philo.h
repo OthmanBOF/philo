@@ -95,10 +95,10 @@ struct  s_data
 
 /* ****prototypes**** */
 
-void	*err_exit(const char *str);
+int		*err_exit(const char *str);
 void	parse_args(t_data *str, char **av);
 void	*malloc_safe(size_t bytes);
-void	mutex_safe(t_mtx *mutex, t_opcode opcode);
+int		mutex_safe(t_mtx *mutex, t_opcode opcode);
 void	thread_safe(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
 int		ft_fill(t_data *data);
 bool	simulation_finished(t_data *data);

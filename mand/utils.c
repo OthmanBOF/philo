@@ -1,9 +1,9 @@
 #include "philo.h"
 
-void	*err_exit(const char *str)
+int	*err_exit(const char *str)
 {
 	printf(RED "%s\n" RST, str);
-	return (0);
+	return ((int *)1);
 }
 
 long	gettime(t_time_code time_code)

@@ -2,7 +2,7 @@ NAME = philo
 
 INCLUDE = philo.h
 
-CFLAGS = -g -fsanitize=address
+CFLAGS = #-g -fsanitize=address
 
 RM = rm -f
 

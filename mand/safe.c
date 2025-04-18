@@ -32,10 +32,13 @@ static	void mutex_error(int status, t_opcode opcode)
 	else if (EBUSY == status)
 		err_exit("the mutex is locked.");
 }
-void	mutex_safe(t_mtx *mutex, t_opcode opcode)
+int	mutex_safe(t_mtx *mutex, t_opcode opcode)
 {
 	if (!mutex)
+	{
 		err_exit("mutex_safe called with NULL mutex");
+		return (1);
+	}
 	if (opcode == LOCK)
 		mutex_error(pthread_mutex_lock(mutex), opcode);
 	else if (opcode == UNLOCK)
@@ -45,7 +48,11 @@ void	mutex_safe(t_mtx *mutex, t_opcode opcode)
 	else if (opcode == DESTROY)
 		mutex_error(pthread_mutex_destroy(mutex), opcode);
 	else
+	{
 		err_exit("wrong opcode for mutex_error");
+		return (1);
+	}
+	return (0);
 }
 
 static void	threads_error(int status, t_opcode opcode)

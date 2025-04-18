@@ -49,7 +49,6 @@ int	ft_fill(t_data *data)
 		return (1);
 	mutex_safe(&data->mutex_data, INIT);
 	mutex_safe(&data->write_mutex, INIT);
-	
 	while (++i < data->philo_num)
 	{
 		mutex_safe(&data->fork[i].fork, INIT);
