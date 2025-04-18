@@ -34,6 +34,8 @@ static	void mutex_error(int status, t_opcode opcode)
 }
 void	mutex_safe(t_mtx *mutex, t_opcode opcode)
 {
+	if (!mutex)
+		err_exit("mutex_safe called with NULL mutex");
 	if (opcode == LOCK)
 		mutex_error(pthread_mutex_lock(mutex), opcode);
 	else if (opcode == UNLOCK)

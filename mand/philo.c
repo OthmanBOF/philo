@@ -10,7 +10,10 @@ int main (int ac, char **av)
 		parse_args(&data, av);
 		if (!data.error_flag)
 		{
-			ft_fill(&data);
+			if (ft_fill(&data))
+			{
+				return (1);
+			}
 			dining(&data);
 			clean(&data);
 		}

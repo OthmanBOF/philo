@@ -6,12 +6,8 @@
 #include <limits.h>
 #include <sys/time.h>
 #include <errno.h>
-/*
- * Usage: Include this header in your project to use ANSI color codes in printf.
- * Example:
- *     printf(BOLD_RED "Error: Something went wrong!\n" RESET);
- * Always use RESET at the end to avoid terminal color issues.
- */
+
+
 #define RST		"\033[0m"
 #define bLACK   "\033[1;30m"
 #define RED     "\033[1;31m"
@@ -104,7 +100,7 @@ void	parse_args(t_data *str, char **av);
 void	*malloc_safe(size_t bytes);
 void	mutex_safe(t_mtx *mutex, t_opcode opcode);
 void	thread_safe(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
-void	ft_fill(t_data *data);
+int		ft_fill(t_data *data);
 bool	simulation_finished(t_data *data);
 void	set_long(t_mtx *mutex,long *dest ,long value);
 long	get_long(t_mtx *mutex, long *value);

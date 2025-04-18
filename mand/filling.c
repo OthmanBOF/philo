@@ -35,7 +35,7 @@ static void	philo_init(t_data *data)
 	}
 }
 
-void	ft_fill(t_data *data)
+int	ft_fill(t_data *data)
 {
 	int	i;
 
@@ -45,12 +45,16 @@ void	ft_fill(t_data *data)
 	data->all_threads_ready = false;
 	data->philo = malloc_safe(sizeof(t_philo) * data->philo_num);
 	data->fork = malloc_safe(sizeof(t_fork) * data->philo_num);
+	if (!data->fork || !data->philo)
+		return (1);
 	mutex_safe(&data->mutex_data, INIT);
 	mutex_safe(&data->write_mutex, INIT);
+	
 	while (++i < data->philo_num)
 	{
 		mutex_safe(&data->fork[i].fork, INIT);
 		data->fork[i].fork_id = i;
 	}
 	philo_init(data);
+	return (0);
 }
