@@ -1,13 +1,15 @@
+
+
 #include "philo.h"
 
-static void	fork_init(t_philo *philo, t_fork *forks, int philo_position)
+static	void	fork_init(t_philo *philo, t_fork *forks, int philo_position)
 {
 	int	philo_nbr;
 
 	philo_nbr = philo->data->philo_num;
 	if (philo->id % 2 == 0)
 	{
-	 	philo->first_fork = &forks[philo_position];
+		philo->first_fork = &forks[philo_position];
 		philo->second_fork = &forks[(philo_position + 1) % philo_nbr];
 	}
 	if (philo->id % 2 != 0)
@@ -19,7 +21,7 @@ static void	fork_init(t_philo *philo, t_fork *forks, int philo_position)
 
 static void	philo_init(t_data *data)
 {
-	int	i;
+	int		i;
 	t_philo	*philo;
 
 	i = -1;

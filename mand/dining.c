@@ -1,4 +1,5 @@
-# include "philo.h"
+
+#include "philo.h"
 
 void	thinking(t_philo *philo, bool pre_simul)
 {
@@ -24,14 +25,14 @@ void	*lone_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	wait_all_threads(philo->data);
-	set_long(&philo->data->mutex_data, &philo->last_meal_time, gettime(MILLISECOND));
+	set_long(&philo->data->mutex_data,
+		&philo->last_meal_time, gettime(MILLISECOND));
 	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
 	write_status(TAKE_FIRST_FOKR, philo);
 	while (!simulation_finished(philo->data))
 		precise_usleep(200, philo->data);
 	return (NULL);
 }
-
 
 static void	eat(t_philo *philo)
 {
@@ -44,7 +45,7 @@ static void	eat(t_philo *philo)
 	write_status(EATING, philo);
 	precise_usleep(philo->data->time_to_eat, philo->data);
 	if (philo->data->meals_limit > 0
-			&& philo->meals_counter == philo->data->meals_limit)
+		&& philo->meals_counter == philo->data->meals_limit)
 		set_bools(&philo->philo_mutex, &philo->full, true);
 	mutex_safe(&philo->first_fork->fork, UNLOCK);
 	mutex_safe(&philo->second_fork->fork, UNLOCK);
@@ -57,7 +58,7 @@ void	*dinner_simul(void *data)
 	philo = (t_philo *)data;
 	wait_all_threads(philo->data);
 	set_long(&philo->philo_mutex, &philo->last_meal_time,
-			gettime(MILLISECOND));
+		gettime(MILLISECOND));
 	increase_long(&philo->data->mutex_data, &philo->data->threads_running_nbr);
 	de_sync_philos(philo);
 	while (!get_bool(&philo->data->mutex_data, &philo->data->end_simul))
@@ -79,13 +80,14 @@ void	dining(t_data *data)
 	if (data->meals_limit == 0)
 		return ;
 	else if (data->philo_num == 1)
-		thread_safe(&data->philo[0].thred_id, lone_philo, &data->philo[0], CREAT);
+		thread_safe(&data->philo[0].thred_id,
+			lone_philo, &data->philo[0], CREAT);
 	else
 	{
 		i = -1;
-	while (++i < data->philo_num)
-		thread_safe(&data->philo[i].thred_id, dinner_simul,
-			&data->philo[i], CREAT);
+		while (++i < data->philo_num)
+			thread_safe(&data->philo[i].thred_id, dinner_simul,
+				&data->philo[i], CREAT);
 	}
 	thread_safe(&data->monitor, monitor_dinner, data, CREAT);
 	data->start_simul = gettime(MILLISECOND);
