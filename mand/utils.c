@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/17 17:21:53 by obouftou          #+#    #+#             */
+/*   Updated: 2025/06/17 17:21:55 by obouftou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	*err_exit(const char *str)
@@ -8,7 +20,8 @@ int	*err_exit(const char *str)
 
 long	gettime(t_time_code time_code)
 {
-	struct	timeval	tv;
+	struct timeval	tv;
+
 	if (gettimeofday(&tv, NULL))
 		err_exit("Gettimeofdayfailed");
 	if (SECOND == time_code)
@@ -36,7 +49,7 @@ void	precise_usleep(long usec, t_data *data)
 		elapsed = gettime(MICROSECOND) - start;
 		rem = usec - elapsed;
 		if (rem > 1e4)
-			usleep(1000);
+			usleep(500);
 		else
 		{
 			while (gettime(MICROSECOND) - start < usec)

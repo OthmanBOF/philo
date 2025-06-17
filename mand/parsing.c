@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/17 17:12:46 by obouftou          #+#    #+#             */
+/*   Updated: 2025/06/17 17:14:22 by obouftou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-static inline bool ft_isspace(char c)
+static inline bool	ft_isspace(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
 }
 
-static inline bool is_digit(char c)
+static inline bool	is_digit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
@@ -14,7 +26,7 @@ static long	my_atol(t_data *data, const char *str)
 {
 	long	res;
 
-	while(ft_isspace(*str))
+	while (ft_isspace(*str))
 		str++;
 	if (*str == '+')
 		str++;
@@ -23,7 +35,7 @@ static long	my_atol(t_data *data, const char *str)
 	if (!is_digit(*str))
 		err_exit("only valid digitts ;)");
 	res = 0;
-	while(is_digit(*str))
+	while (is_digit(*str))
 		res = res * 10 + (*str++ - '0');
 	while (*str)
 	{
@@ -31,10 +43,10 @@ static long	my_atol(t_data *data, const char *str)
 			data->error_flag = 1;
 		str++;
 	}
-	return(res);
+	return (res);
 }
 
-static long	ft_check(t_data *data,char *str)
+static long	ft_check(t_data *data, char *str)
 {
 	long	input;
 
@@ -54,7 +66,6 @@ static long	ft_check(t_data *data,char *str)
 	return (input);
 }
 
-
 void	parse_args(t_data *str, char **av)
 {
 	str->philo_num = ft_check(str, av[1]);
@@ -70,10 +81,10 @@ void	parse_args(t_data *str, char **av)
 	if (str->time_to_die < 6e4
 		|| str->time_to_eat < 6e4
 		|| str->time_to_sleep < 6e4)
-		{
-			err_exit("use timestamps major than 60ms");
-			str->error_flag = 1;
-		}
+	{
+		err_exit("use timestamps major than 60ms");
+		str->error_flag = 1;
+	}
 	if (av[5])
 		str->meals_limit = ft_check(str, av[5]);
 	else

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/17 17:23:08 by obouftou          #+#    #+#             */
+/*   Updated: 2025/06/17 17:23:09 by obouftou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	write_status(t_philo_status status, t_philo *philo)
@@ -12,9 +24,11 @@ void	write_status(t_philo_status status, t_philo *philo)
 		mutex_safe(&philo->data->write_mutex, LOCK);
 		if ((TAKE_FIRST_FOKR == status || TAKE_SECOND_FORK == status)
 			&& !simulation_finished(philo->data))
-			printf(WHITE"%-6ld"RST" %d has taken a fork\n"RST, elapsed, philo->id);
+			printf(WHITE"%-6ld"RST" %d has taken a fork\n"RST,
+				elapsed, philo->id);
 		else if (EATING == status && !simulation_finished(philo->data))
-			printf(GREEN"%-6ld"RST GREEN" %d is eating\n"RST, elapsed, philo->id);
+			printf(GREEN"%-6ld"RST GREEN" %d is eating\n"RST,
+				elapsed, philo->id);
 		else if (SLEEPING == status && !simulation_finished(philo->data))
 			printf(WHITE"%-6ld"RST" %d is sleeping\n", elapsed, philo->id);
 		else if (THINKING == status && !simulation_finished(philo->data))

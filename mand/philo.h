@@ -1,22 +1,36 @@
-#include <pthread.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <limits.h>
-#include <sys/time.h>
-#include <errno.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/17 16:08:10 by obouftou          #+#    #+#             */
+/*   Updated: 2025/06/17 17:08:51 by obouftou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef PHILO_H
+# define PHILO_H
 
-#define RST		"\033[0m"
-#define bLACK   "\033[1;30m"
-#define RED     "\033[1;31m"
-#define GREEN   "\033[1;32m"
-#define YELLOW  "\033[1;33m"
-#define BLUE    "\033[1;34m"
-#define MAGENTA "\033[1;35m"
-#define CYAN    "\033[1;36m"
-#define WHITE   "\033[1;37m"
+# include <pthread.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <limits.h>
+# include <sys/time.h>
+# include <errno.h>
+
+# define RST		"\033[0m"
+# define BLACK   "\033[1;30m"
+# define RED     "\033[1;31m"
+# define GREEN   "\033[1;32m"
+# define YELLOW  "\033[1;33m"
+# define BLUE    "\033[1;34m"
+# define MAGENTA "\033[1;35m"
+# define CYAN    "\033[1;36m"
+# define WHITE   "\033[1;37m"
 
 # define PH_MAX 200
 
@@ -48,9 +62,9 @@ typedef enum e_status
 	DIED,
 }		t_philo_status;
 
-typedef pthread_mutex_t t_mtx;
+typedef pthread_mutex_t	t_mtx;
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_fork
 {
@@ -58,10 +72,8 @@ typedef struct s_fork
 	int		fork_id;
 }		t_fork;
 
-
 typedef struct s_philo
 {
-
 	int			id;
 	long		meals_counter;
 	bool		full;
@@ -71,9 +83,9 @@ typedef struct s_philo
 	pthread_t	thred_id;
 	t_mtx		philo_mutex;
 	t_data		*data;
-}		t_philo;;
+}		t_philo;
 
-struct  s_data
+struct	s_data
 {
 	int			error_flag;
 	long		philo_num;
@@ -92,17 +104,15 @@ struct  s_data
 	t_philo		*philo;
 };
 
-
-/* ****prototypes**** */
-
 int		*err_exit(const char *str);
 void	parse_args(t_data *str, char **av);
 void	*malloc_safe(size_t bytes);
 int		mutex_safe(t_mtx *mutex, t_opcode opcode);
-void	thread_safe(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
+void	thread_safe(pthread_t *thread, void *(*foo)(void *),
+			void *data, t_opcode opcode);
 int		ft_fill(t_data *data);
 bool	simulation_finished(t_data *data);
-void	set_long(t_mtx *mutex,long *dest ,long value);
+void	set_long(t_mtx *mutex, long *dest, long value);
 long	get_long(t_mtx *mutex, long *value);
 bool	get_bool(t_mtx *mutex, bool *value);
 void	set_bools(t_mtx *mutex, bool *dest, bool value);
@@ -118,4 +128,4 @@ void	thinking(t_philo *philo, bool pre_simul);
 void	de_sync_philos(t_philo *philo);
 void	dining(t_data *data);
 
-
+#endif
