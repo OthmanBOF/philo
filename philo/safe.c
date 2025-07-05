@@ -6,7 +6,7 @@
 /*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:16:33 by obouftou          #+#    #+#             */
-/*   Updated: 2025/06/17 17:20:32 by obouftou         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:05:42 by obouftou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	mutex_safe(t_mtx *mutex, t_opcode opcode)
 
 static void	threads_error(int status, t_opcode opcode)
 {
-	if (status != 0 && (opcode == CREAT || opcode == JOIN
-			|| opcode == DETACH))
+	if (status != 0 && (opcode == CREAT || opcode == JOIN))
 	{
 		err_exit("Thread error");
 		return ;
@@ -85,11 +84,9 @@ void	thread_safe(pthread_t *thread, void *(*foo)(void *),
 		threads_error(pthread_create(thread, NULL, foo, data), opcode);
 	else if (opcode == JOIN)
 		threads_error(pthread_join(*thread, NULL), opcode);
-	else if (opcode == DETACH)
-		threads_error(pthread_detach(*thread), opcode);
 	else
 	{
 		err_exit("wrong opcode for thrade_safe:"
-			"use: <CREAT> <JOIN> <DETACH>");
+			"use: <CREAT> <JOIN>");
 	}
 }

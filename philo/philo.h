@@ -6,7 +6,7 @@
 /*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:08:10 by obouftou          #+#    #+#             */
-/*   Updated: 2025/07/04 09:53:08 by obouftou         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:05:25 by obouftou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef enum s_opcode
 	DESTROY,
 	CREAT,
 	JOIN,
-	DETACH,
 }		t_opcode;
 
 typedef enum e_time_code
