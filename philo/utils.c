@@ -6,7 +6,7 @@
 /*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:21:53 by obouftou          #+#    #+#             */
-/*   Updated: 2025/06/17 17:21:55 by obouftou         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:52:26 by obouftou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,20 @@ void	clean(t_data *data)
 	mutex_safe(&data->mutex_data, DESTROY);
 	free(data->fork);
 	free(data->philo);
+}
+
+void	create_philos(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->philo_num)
+	{
+		if (!thread_safe(&data->philo[i].thred_id,
+				dinner_simul, &data->philo[i], CREAT))
+		{
+			data->philo_num = i;
+			break ;
+		}
+	}
 }

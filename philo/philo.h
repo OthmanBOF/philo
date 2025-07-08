@@ -6,7 +6,7 @@
 /*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:08:10 by obouftou          #+#    #+#             */
-/*   Updated: 2025/07/05 14:05:25 by obouftou         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:52:36 by obouftou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int		*err_exit(const char *str);
 void	parse_args(t_data *str, char **av);
 void	*malloc_safe(size_t bytes);
 int		mutex_safe(t_mtx *mutex, t_opcode opcode);
-void	thread_safe(pthread_t *thread, void *(*foo)(void *),
+bool	thread_safe(pthread_t *thread, void *(*foo)(void *),
 			void *data, t_opcode opcode);
 int		ft_fill(t_data *data);
 bool	simulation_finished(t_data *data);
@@ -126,5 +126,7 @@ void	clean(t_data *data);
 void	thinking(t_philo *philo, bool pre_simul);
 void	de_sync_philos(t_philo *philo);
 void	dining(t_data *data);
+void	*dinner_simul(void *data);
+void	create_philos(t_data *data);
 
 #endif

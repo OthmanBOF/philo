@@ -6,7 +6,7 @@
 /*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:20:55 by obouftou          #+#    #+#             */
-/*   Updated: 2025/06/17 17:21:06 by obouftou         ###   ########.fr       */
+/*   Updated: 2025/07/06 09:54:52 by obouftou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,5 @@ bool	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 void	de_sync_philos(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
-		precise_usleep(3e4, philo->data);
-	else
-		thinking(philo, true);
+		precise_usleep(3e2, philo->data);
 }

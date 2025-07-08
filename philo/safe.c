@@ -6,7 +6,7 @@
 /*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:16:33 by obouftou          #+#    #+#             */
-/*   Updated: 2025/07/05 14:05:42 by obouftou         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:21:40 by obouftou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,34 @@ int	mutex_safe(t_mtx *mutex, t_opcode opcode)
 	return (0);
 }
 
-static void	threads_error(int status, t_opcode opcode)
+static bool	threads_error(int status, t_opcode opcode)
 {
 	if (status != 0 && (opcode == CREAT || opcode == JOIN))
 	{
 		err_exit("Thread error");
-		return ;
+		return (false);
 	}
+	return (true);
 }
 
-void	thread_safe(pthread_t *thread, void *(*foo)(void *),
+bool	thread_safe(pthread_t *thread, void *(*foo)(void *),
 				void *data, t_opcode opcode)
 {
 	if (CREAT == opcode)
-		threads_error(pthread_create(thread, NULL, foo, data), opcode);
+	{
+		if (!threads_error(pthread_create(thread, NULL, foo, data), opcode))
+			return (false);
+	}
 	else if (opcode == JOIN)
-		threads_error(pthread_join(*thread, NULL), opcode);
+	{
+		if (!threads_error(pthread_join(*thread, NULL), opcode))
+			return (false);
+	}
 	else
 	{
 		err_exit("wrong opcode for thrade_safe:"
 			"use: <CREAT> <JOIN>");
+		return (false);
 	}
+	return (true);
 }
