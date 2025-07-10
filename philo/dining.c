@@ -6,7 +6,7 @@
 /*   By: obouftou <obouftou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:06:21 by obouftou          #+#    #+#             */
-/*   Updated: 2025/07/08 17:52:45 by obouftou         ###   ########.fr       */
+/*   Updated: 2025/07/09 10:26:42 by obouftou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,39 +83,6 @@ void	*dinner_simul(void *data)
 	}
 	return (NULL);
 }
-
-// void	dining(t_data *data)
-// {
-// 	int	i;
-
-// 	if (data->meals_limit == 0)
-// 		return ;
-// 	else if (data->philo_num == 1)
-// 		thread_safe(&data->philo[0].thred_id,
-// 			lone_philo, &data->philo[0], CREAT);
-// 	else
-// 	{
-// 		i = -1;
-// 		while (++i < data->philo_num)
-// 		{
-// 			if (!thread_safe(&data->philo[i].thred_id, dinner_simul,
-// 				&data->philo[i], CREAT))
-// 			{
-// 				data->philo_num = i;
-// 				break ;
-// 			}
-// 		}
-// 	}
-// 	thread_safe(&data->monitor, monitor_dinner, data, CREAT);
-// 	data->start_simul = gettime(MILLISECOND);
-// 	set_bools(&data->mutex_data, &data->all_threads_ready, true);
-// 	i = -1;
-// 	while (++i < data->philo_num)
-// 		thread_safe(&data->philo[i].thred_id, NULL, NULL, JOIN);
-// 	set_bools(&data->mutex_data, &data->end_simul, true);
-// 	thread_safe(&data->monitor, NULL, NULL, JOIN);
-// }
-
 
 void	dining(t_data *data)
 {
